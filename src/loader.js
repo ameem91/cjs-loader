@@ -1,4 +1,5 @@
 const vm = require("vm");
+const path = require("path");
 
 class Module {
   constructor(id, parent) {
@@ -14,12 +15,12 @@ class Module {
   compile(content, filename) {
     const wrapper = Module.wrap(content);
     var dirname = path.dirname(filename);
-    var require = makeRequireFunction(this);
+    var require = Module.makeRequireFunction(this);
 
     // this works similarly to eval, except it does not have
     // access to the local scope. It CAN access global scope, however.
-    const result = vm.runInThisContext(wrapper);
-    result = compiledWrapper.call(
+    const compiledWrapper = vm.runInThisContext(wrapper);
+    const result = compiledWrapper.call(
       // TIL `this` inside a node module points to module.exports
       this.exports,
       this.exports,
@@ -37,15 +38,17 @@ class Module {
       "\n});"
     ];
 
-    return wrapper[0] + script + wrapper[1];
+    return wrapper[0] + content + wrapper[1];
   }
 
   static updateChildren(parent, child, scan) {
     // TODO
+    return null;
   }
 
   static makeRequireFunction() {
     // TODO
+    return () => {};
   }
 }
 
