@@ -1,4 +1,4 @@
-const LoaderUtils  = require("./loaderUtils");
+const LoaderUtils = require("./loaderUtils");
 
 class Loader {
   constructor(cache) {
@@ -7,14 +7,14 @@ class Loader {
   }
 
   load(id, parentId) {
-      if(this.cache.has(id)) {
-          const cachedModule = this.cache.get(id);
-          return cachedModule.exports;
-      }
-      const module = LoaderUtils.buildModule(id, parentId, this.load);
-      this.cache.set(id, module);
-      LoaderUtils.execute(module);
-      return module.exports;
+    if (this.cache.has(id)) {
+      const cachedModule = this.cache.get(id);
+      return cachedModule.exports;
+    }
+    const module = LoaderUtils.buildModule(id, parentId, this.load);
+    this.cache.set(id, module);
+    LoaderUtils.execute(module);
+    return module.exports;
   }
 }
 
