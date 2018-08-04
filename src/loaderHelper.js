@@ -1,6 +1,6 @@
 const fs = require("fs");
 const vm = require("vm");
-const pathHeper = require("path");
+const pathHelper = require("path");
 const Module = require("./module");
 
 function execute(module, require) {
@@ -15,13 +15,13 @@ function execute(module, require) {
 }
 
 function resolvePath(path, parentModule) {
-  if (pathHeper.isAbsolute(path)) {
+  if (pathHelper.isAbsolute(path)) {
     return path;
   }
   const cwd = parentModule
-    ? pathHeper.dirname(parentModule.absolutePath)
+    ? pathHelper.dirname(parentModule.absolutePath)
     : process.cwd();
-  return pathHeper.resolve(cwd, path);
+  return pathHelper.resolve(cwd, path);
 }
 
 function createModule(absolutePath) {
