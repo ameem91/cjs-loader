@@ -1,7 +1,6 @@
 class Module {
-  constructor(filename, require) {
-    this.filename = filename;
-    this.require = require;
+  constructor(absolutePath) {
+    this.absolutePath = absolutePath;
     this.exports = {};
   }
 }

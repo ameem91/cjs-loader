@@ -1,11 +1,12 @@
 const Loader = require("./src/loader");
+const loaderHelper = require("./src/loaderHelper");
 
 function main() {
   const cache = new Map();
-  const loader = new Loader(cache);
+  const loader = new Loader(loaderHelper, cache);
   const fileName =
-    "/Users/Ashaik/workspace/projects/node-cjs-loader/samples/index.js";
-  loader.load(fileName, null);
+    "./samples/index.js";
+  loader.getOutput(fileName, null);
 }
 
 main();

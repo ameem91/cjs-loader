@@ -1,22 +1,27 @@
-const LoaderUtils = require("./loaderUtils");
-
-class Loader {
-  constructor(moduleCache) {
-    this.moduleCache = moduleCache;
-    this.load = this.load.bind(this);
+class ModuleLoader {
+  constructor(helper, cache) {
+    this.cache = cache;
+    this.helper = helper;
+    this.getOutput = this.getOutput.bind(this);
+    this.execute = this.execute.bind(this);
   }
 
-  load(filename) {
-    if (this.moduleCache.has(filename)) {
-      const cachedModule = this.moduleCache.get(filename);
-      return cachedModule.exports;
+  getOutput(path, parent) {
+    const absolutePath = this.helper.resolvePath(path, parent);
+    if (this.cache.has(absolutePath)) {
+      return this.cache.get(absolutePath);
     }
-    const module = LoaderUtils.createModule(filename, this.load);
-    this.moduleCache.set(filename, module);
+    const module = this.helper.createModule(absolutePath);
+    return this.execute(module);
+  }
+
+  execute(module) {
+    const require = this.helper.createRequire(module, this);
     //synchronous execution
-    LoaderUtils.execute(module);
+    this.helper.execute(module, require);
+    this.cache.set(module.absolutePath, module.exports);
     return module.exports;
   }
 }
 
-module.exports = Loader;
+module.exports = ModuleLoader;
