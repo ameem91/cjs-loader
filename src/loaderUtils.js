@@ -3,14 +3,14 @@ const fs = require("fs");
 const vm = require("vm");
 
 class LoaderUtils {
-  static buildModule(id, parentId, loadMethod) {
-    const require = LoaderUtils.buildRequire(id, loadMethod);
-    return new Module(id, parentId, require);
+  static createModule(filename, loadMethod) {
+    const require = LoaderUtils.createRequireFunc(loadMethod);
+    return new Module(filename, require);
   }
 
-  static buildRequire(parentId, loadMethod) {
-    return id => {
-      return loadMethod(id, parentId);
+  static createRequireFunc(loadMethod) {
+    return filename => {
+      return loadMethod(filename);
     };
   }
 
@@ -28,12 +28,13 @@ class LoaderUtils {
 
   static compile(module) {
     const script = LoaderUtils.makeScript(module);
+    // vm.runInThisContext is similar to eval but does not have access to local scope
     const compiledModule = vm.runInThisContext(script);
     return compiledModule;
   }
 
   static makeScript(module) {
-    const content = fs.readFileSync(module.id, "utf8");
+    const content = fs.readFileSync(module.filename, "utf8");
     const wrapper = ["(function (exports, require, module) { ", "\n});"];
     return wrapper[0] + content + wrapper[1];
   }

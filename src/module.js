@@ -1,7 +1,6 @@
 class Module {
-  constructor(id, parent, require) {
-    this.id = id;
-    this.parent = parent;
+  constructor(filename, require) {
+    this.filename = filename;
     this.require = require;
     this.exports = {};
   }

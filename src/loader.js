@@ -1,18 +1,19 @@
 const LoaderUtils = require("./loaderUtils");
 
 class Loader {
-  constructor(cache) {
-    this.cache = cache;
+  constructor(moduleCache) {
+    this.moduleCache = moduleCache;
     this.load = this.load.bind(this);
   }
 
-  load(id, parentId) {
-    if (this.cache.has(id)) {
-      const cachedModule = this.cache.get(id);
+  load(filename) {
+    if (this.moduleCache.has(filename)) {
+      const cachedModule = this.moduleCache.get(filename);
       return cachedModule.exports;
     }
-    const module = LoaderUtils.buildModule(id, parentId, this.load);
-    this.cache.set(id, module);
+    const module = LoaderUtils.createModule(filename, this.load);
+    this.moduleCache.set(filename, module);
+    //synchronous execution
     LoaderUtils.execute(module);
     return module.exports;
   }
