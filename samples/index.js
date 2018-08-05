@@ -1,6 +1,6 @@
 const greeter = require("./greeter.js");
-const greeter2 = require("./greeter.js");
+const { makePerson } = require("./personUtils.js");
 
-console.log(greeter());
-//cached version
-console.log(greeter2());
+const person = makePerson("Bob Smith");
+
+console.log(greeter.greet(person));

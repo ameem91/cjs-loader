@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "git@github.com:ameem91/node-cjs-loader.git",
   "author": "Ameem Shaik <ashaik@ebsco.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "cjs": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.17.0"
+  }
 }

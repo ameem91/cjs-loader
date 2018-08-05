@@ -1,5 +1,7 @@
-function greeter() {
-  return "Hello World!";
+function greet(person) {
+  return `Hello ${person.name}!`;
 }
 
-module.exports = greeter;
+module.exports = {
+  greet
+};

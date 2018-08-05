@@ -1,12 +1,15 @@
+#!/usr/bin/env node
+"use strict";
+
+const program = require("commander");
 const Loader = require("./src/loader");
 const loaderHelper = require("./src/loaderHelper");
 
-function main() {
+function load(path) {
   const cache = new Map();
   const loader = new Loader(loaderHelper, cache);
-  const fileName =
-    "./samples/index.js";
-  loader.getOutput(fileName, null);
+  loader.getOutput(path, null);
 }
 
-main();
+program.parse(process.argv);
+load(program.args[0]);

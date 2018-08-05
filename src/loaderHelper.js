@@ -29,8 +29,8 @@ function createModule(absolutePath) {
 }
 
 function createRequire(parent, loader) {
-  return unresolvedPath => {
-    return loader.getOutput(unresolvedPath, parent);
+  return path => {
+    return loader.getOutput(path, parent);
   };
 }
 
