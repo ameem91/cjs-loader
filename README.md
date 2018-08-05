@@ -28,5 +28,5 @@ exports.something = ...
 
 Execute your file using the CLI:
 ```
-cjs <path-to-file>
+cjs-loader <path-to-file>
 ```
