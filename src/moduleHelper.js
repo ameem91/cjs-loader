@@ -6,8 +6,8 @@ function execute(module, require) {
   const compiledModule = compile(module);
   return compiledModule.call(
     // TIL `this` inside a node module points to module.exports
-    exports,
-    exports,
+    module.exports,
+    module.exports,
     require,
     module
   );

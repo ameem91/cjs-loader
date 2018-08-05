@@ -1,9 +1,9 @@
 {
-  "name": "node-cjs-loader",
+  "name": "cjs-loader",
   "version": "1.0.0",
-  "description": "Simplified version of the module loader in node.js",
+  "description": "Basic CommonJS module loader.",
   "main": "index.js",
-  "repository": "git@github.com:ameem91/node-cjs-loader.git",
+  "repository": "git@github.com:ameem91/cjs-loader.git",
   "author": "Ameem Shaik <ashaik@ebsco.com>",
   "license": "MIT",
   "bin": {

@@ -4,4 +4,4 @@ function makePerson(name) {
   };
 }
 
-module.exports.makePerson = makePerson;
+exports.makePerson = makePerson;
