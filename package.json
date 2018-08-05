@@ -13,9 +13,7 @@
     "testEnvironment": "node",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.{js}",
-      "!**/node_modules/**",
-      "!**/test/**"
+      "**/src/*.{js}"
     ]
   },
   "bin": {
