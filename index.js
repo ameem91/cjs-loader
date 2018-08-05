@@ -13,4 +13,7 @@ function load(path) {
 }
 
 program.parse(process.argv);
+if(!program.args[0]) {
+  throw new Error("File path must be specified");
+}
 load(program.args[0]);
