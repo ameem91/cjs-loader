@@ -20,10 +20,11 @@ describe("PathHelper", () => {
 
     it("should covert relative paths to absolute using the cwd as baseline if no parent is available", () => {
       const mockPath = "../../anotherFile.js";
-      process.cwd = jest.fn();
-      process.cwd.mockReturnValue("/path/to/mycwd/");
+      const mockCwd = jest
+        .spyOn(process, "cwd")
+        .mockImplementation(() => "/path/to/mycwd/");
       expect(PathHelper.resolvePath(mockPath)).toEqual("/path/anotherFile.js");
-      process.cwd.restore();
+      mockCwd.mockRestore();
     });
   });
 });
