@@ -3,11 +3,12 @@
 
 const program = require("commander");
 const Loader = require("./src/loader");
-const loaderHelper = require("./src/loaderHelper");
+const moduleHelper = require("./src/moduleHelper");
+const pathHelper = require("./src/pathHelper");
 
 function load(path) {
   const cache = new Map();
-  const loader = new Loader(loaderHelper, cache);
+  const loader = new Loader(moduleHelper, pathHelper, cache);
   loader.getOutput(path, null);
 }
 

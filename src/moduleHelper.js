@@ -1,6 +1,5 @@
 const fs = require("fs");
 const vm = require("vm");
-const pathHelper = require("path");
 const Module = require("./module");
 
 function execute(module, require) {
@@ -12,16 +11,6 @@ function execute(module, require) {
     require,
     module
   );
-}
-
-function resolvePath(path, parentModule) {
-  if (pathHelper.isAbsolute(path)) {
-    return path;
-  }
-  const cwd = parentModule
-    ? pathHelper.dirname(parentModule.absolutePath)
-    : process.cwd();
-  return pathHelper.resolve(cwd, path);
 }
 
 function createModule(absolutePath) {
@@ -49,7 +38,6 @@ function makeScript(module) {
 
 module.exports = {
   execute,
-  resolvePath,
   createModule,
   createRequire
 };

@@ -1,24 +1,25 @@
 class ModuleLoader {
-  constructor(helper, cache) {
+  constructor(moduleHelper, pathHelper, cache) {
     this.cache = cache;
-    this.helper = helper;
+    this.moduleHelper = moduleHelper;
+    this.pathHelper = pathHelper;
     this.getOutput = this.getOutput.bind(this);
     this.execute = this.execute.bind(this);
   }
 
   getOutput(path, parent) {
-    const absolutePath = this.helper.resolvePath(path, parent);
+    const absolutePath = this.pathHelper.resolvePath(path, parent);
     if (this.cache.has(absolutePath)) {
       return this.cache.get(absolutePath);
     }
-    const module = this.helper.createModule(absolutePath);
+    const module = this.moduleHelper.createModule(absolutePath);
     return this.execute(module);
   }
 
   execute(module) {
-    const require = this.helper.createRequire(module, this);
+    const require = this.moduleHelper.createRequire(module, this);
     //synchronous execution
-    this.helper.execute(module, require);
+    this.moduleHelper.execute(module, require);
     this.cache.set(module.absolutePath, module.exports);
     return module.exports;
   }
