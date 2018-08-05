@@ -6,6 +6,18 @@
   "repository": "git@github.com:ameem91/cjs-loader.git",
   "author": "Ameem Shaik <ashaik@ebsco.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest test/"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js}",
+      "!**/node_modules/**",
+      "!**/test/**"
+    ]
+  },
   "bin": {
     "cjs-loader": "./index.js"
   },
